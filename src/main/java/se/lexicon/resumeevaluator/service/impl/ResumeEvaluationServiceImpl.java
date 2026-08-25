@@ -7,6 +7,7 @@ import se.lexicon.resumeevaluator.dto.ResumeEvaluationRequest;
 import se.lexicon.resumeevaluator.dto.ResumeEvaluationResponse;
 import se.lexicon.resumeevaluator.service.OpenAIService;
 import se.lexicon.resumeevaluator.service.ResumeEvaluationService;
+import se.lexicon.resumeevaluator.service.ResumeEvaluationValidator;
 
 import java.util.List;
 
@@ -15,11 +16,16 @@ import java.util.List;
 public class ResumeEvaluationServiceImpl implements ResumeEvaluationService {
 
     private final OpenAIService openAIService;
+    private final ResumeEvaluationValidator validator;
 
     @Override
     public ResumeEvaluationResponse evaluate(ResumeEvaluationRequest request) {
 
         // OpenAI response
-        return openAIService.evaluate(request);
+        ResumeEvaluationResponse response = openAIService.evaluate(request);
+
+        validator.validate(response);
+
+        return response;
     }
 }

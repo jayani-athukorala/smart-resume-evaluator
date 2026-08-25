@@ -22,51 +22,59 @@ public class OpenAIServiceImpl implements OpenAIService {
         return chatClient
                 .prompt()
                 .system("""
-                        You are a Senior Technical Recruiter
-                        with 20 years of experience evaluating
-                        software engineering candidates.
-
-                        Your task is to objectively evaluate a
-                        candidate's resume against a job description.
-
-                        You must:
-
-                        - Identify relevant strengths.
-                        - Identify skills that match the job.
-                        - Identify important missing skills.
-                        - Provide practical recommendations.
-                        - Assign an overall match score from 0 to 100.
-
-                        Do not invent experience, skills, education,
-                        certifications, or achievements.
-
-                        Only use information explicitly present
-                        in the resume.
-
-                        If a required skill is not mentioned in the
-                        resume, consider it missing.
-
-                        Be objective and concise.
-                        """)
+                    You are a Senior Technical Recruiter with 20 years
+                    of experience evaluating software engineering candidates.
+            
+                    Your task is to evaluate how well a candidate's resume
+                    matches a specific job description.
+            
+                    Evaluation rules:
+            
+                    1. Only use information explicitly stated in the resume.
+                    2. Never invent skills, experience, education,
+                       certifications, or achievements.
+                    3. A skill should only be considered matched when the
+                       resume provides evidence of that skill.
+                    4. If a job requirement is not supported by the resume,
+                       consider it missing.
+                    5. The overall score must be between 0 and 100.
+                    6. The score should reflect the candidate's overall
+                       alignment with the job requirements.
+                    7. Recommendations must be actionable and relevant.
+                    8. Keep the evaluation concise and professional.
+                    9. Do not make assumptions based on job titles alone.
+                    10. Do not evaluate protected characteristics or personal
+                        demographic information.
+            
+                    Return only the requested structured evaluation.
+                    """)
                 .user(user -> user
                         .text("""
-                                Evaluate the following resume against
-                                the following job description.
-
-                                RESUME:
-                                {resumeText}
-
-                                JOB DESCRIPTION:
-                                {jobDescriptionText}
-                                """)
-                        .param("resumeText", request.resumeText())
-                        .param("jobDescriptionText", request.jobDescriptionText()))
+                        Evaluate the following candidate against the
+                        following job description.
+        
+                        === RESUME ===
+        
+                        {resumeText}
+        
+                        === JOB DESCRIPTION ===
+        
+                        {jobDescriptionText}
+        
+                        === END INPUT ===
+        
+                        Identify:
+        
+                        - Overall match score
+                        - Summary
+                        - Resume strengths
+                        - Skills explicitly matched to the job
+                        - Important missing skills
+                        - Actionable recommendations
+                        """)
+                                .param("resumeText", request.resumeText())
+                                .param("jobDescriptionText", request.jobDescriptionText()))
                 .call()
-                .entity(
-                        ResumeEvaluationResponse.class,
-                        spec -> spec
-                                .useProviderStructuredOutput()
-                                .validateSchema()
-                );
+                .entity(ResumeEvaluationResponse.class);
     }
 }
