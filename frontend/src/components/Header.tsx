@@ -12,7 +12,7 @@ const Header = () => {
 
                     <div>
                         <h1 className="text-lg font-bold tracking-tight text-slate-900">
-                            Resume Evaluator
+                            Smart Resume Evaluator
                         </h1>
 
                         <p className="text-xs text-slate-500">
