@@ -15,3 +15,21 @@ Content-Type: application/json
   "resumeText": "",
   "jobDescriptionText": ""
 }
+
+### Evaluate PDF resume
+POST http://localhost:8080/api/v1/evaluations/pdf
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="resume"; filename="resume.pdf"
+Content-Type: application/pdf
+
+< C:\Users\JAYANI\Documents\Jayani_Athukorala_CV.pdf
+
+--WebAppBoundary
+Content-Disposition: form-data; name="jobDescription"
+
+We are looking for a Senior Java Developer with Spring Boot,
+REST APIs, PostgreSQL, AWS and Kubernetes experience.
+
+--WebAppBoundary--
