@@ -1,11 +1,27 @@
-export default function LoadingSpinner() {
+const LoadingSpinner = () => {
     return (
-        <div className="flex items-center justify-center py-8">
-            <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-indigo-600" />
+        <div className="rounded-xl border border-indigo-100 bg-indigo-50 p-5">
 
-            <span className="ml-3 text-gray-600">
-        Evaluating your resume...
-      </span>
+            <div className="flex items-center gap-4">
+
+                <div className="h-6 w-6 animate-spin rounded-full border-2 border-indigo-200 border-t-indigo-600" />
+
+                <div>
+
+                    <p className="text-sm font-semibold text-indigo-900">
+                        Analyzing your resume...
+                    </p>
+
+                    <p className="mt-1 text-xs text-indigo-600">
+                        AI is comparing your resume against the job description.
+                    </p>
+
+                </div>
+
+            </div>
+
         </div>
     )
 }
+
+export default LoadingSpinner
