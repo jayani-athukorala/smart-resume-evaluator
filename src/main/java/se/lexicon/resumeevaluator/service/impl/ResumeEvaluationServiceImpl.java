@@ -9,7 +9,8 @@ import se.lexicon.resumeevaluator.service.OpenAIService;
 import se.lexicon.resumeevaluator.service.ResumeEvaluationService;
 import se.lexicon.resumeevaluator.service.ResumeEvaluationValidator;
 
-import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 @RequiredArgsConstructor
@@ -17,14 +18,18 @@ public class ResumeEvaluationServiceImpl implements ResumeEvaluationService {
 
     private final OpenAIService openAIService;
     private final ResumeEvaluationValidator validator;
+    private static final Logger log = LoggerFactory.getLogger(ResumeEvaluationServiceImpl.class);
 
     @Override
     public ResumeEvaluationResponse evaluate(ResumeEvaluationRequest request) {
 
-        // OpenAI response
+        log.info("Starting resume evaluation");
+
         ResumeEvaluationResponse response = openAIService.evaluate(request);
 
         validator.validate(response);
+
+        log.info("Resume evaluation completed with score {}", response.overallScore());
 
         return response;
     }

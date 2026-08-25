@@ -49,4 +49,21 @@ class PiiRedactorTest {
                 .doesNotContain("+46 70 123 45 67")
                 .contains("Senior Java Developer");
     }
+
+    @Test
+    void shouldNotModifyNormalResumeText() {
+
+        String input = """
+            Senior Java Developer
+            5 years of experience
+            Spring Boot
+            PostgreSQL
+            Docker
+            """;
+
+        String result = redactor.redact(input);
+
+        assertThat(result)
+                .isEqualTo(input);
+    }
 }
