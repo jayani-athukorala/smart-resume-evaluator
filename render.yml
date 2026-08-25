@@ -31,4 +31,4 @@ services:
 
     envVars:
       - key: VITE_API_URL
-        sync: false
+        value: https://resume-evaluator-api-zs0t.onrender.com

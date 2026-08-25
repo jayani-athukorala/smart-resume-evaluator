@@ -76,7 +76,9 @@ The backend includes tests for:
 
 ### 📖 API Documentation
 
-OpenAPI / Swagger documentation is available for exploring the backend API.
+The backend API is documented with OpenAPI / Swagger.
+
+🔗 [Open Swagger UI](https://resume-evaluator-api-zs0t.onrender.com/swagger-ui/index.html)
 
 ---
 
