@@ -17,7 +17,7 @@
 
 ### 🌐 Try the Resume Evaluator
 
-**👉 [Open Live Demo](https://resume-evaluator.onrender.com)**
+**👉 [Open Live Demo](https://smart-resume-evaluator-coral.vercel.app/)**
 
 Upload a PDF resume or paste resume text, provide a job description, and receive an AI-powered evaluation.
 
