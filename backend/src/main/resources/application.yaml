@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: resume-evaluator
+
+  ai:
+    retry:
+      max-attempts: 1
+
+    openai:
+      api-key: ${OPENAI_API_KEY}
+
+      chat:
+        model: gpt-4o
+        temperature: 0.2
+        max-tokens: 1500
+        
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 6MB
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+  endpoint:
+    health:
+      show-details: never
